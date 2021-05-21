@@ -23,14 +23,16 @@
           <a class="nav-link dropdown-toggle" href="#" id="userMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Welcome  {{ user.username }}
           </a>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userMenu">
-            <a class="dropdown-item" href="{%url 'my_account'%}">My account</a>
-            <a class="dropdown-item" href="{%url 'password_change'%}">Change password</a>
+          <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="userMenu">
+            <a class="dropdown-item" href="#">My account</a>
+            <a class="dropdown-item" href="{% url 'change_password'%}">Change password</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="{% url 'logout' %}">Log out</a>
-          </div>
+          </ul>
+
         </li>
       </ul>
+
         {%else%}
         <form class="form-inline ml-auto">
         <a href="{%url 'login'%}" class="btn btn-outline-secondary">login</a>
@@ -52,8 +54,10 @@
 
 {% endblock body %}
 
+
 <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
 <script src="{% static 'js/popper.min.js' %}"></script>
+
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
 
 </body>
