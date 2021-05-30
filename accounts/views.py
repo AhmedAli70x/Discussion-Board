@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login as auth_login
 from .forms import SignUpForm
+
 def signup(request):
     form = SignUpForm()
     if request.method == 'POST':
@@ -10,8 +11,6 @@ def signup(request):
             user = form.save()
             auth_login(request, user)
             return redirect('home')
-
-
     return render(request, 'signup.html', {'form': form} )
 
 
