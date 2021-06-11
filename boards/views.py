@@ -5,9 +5,10 @@ from django.http import HttpResponse, Http404
 from .models import Board, Topic, Post
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.db.models import Count
 def home(request):
     boards =Board.objects.all()
-    context = {'boards':boards}
+    context = {'boards': boards}
     return render(request, 'home.html', context)
 
 def about(request):
@@ -18,8 +19,9 @@ def about(request):
 def board_topics(request, board_id):
     # try:
     board = get_object_or_404(Board, pk=board_id)
+    topics = board.topics.order_by('-created_dt').annotate(comments=Count('posts'))
 
-    return render(request, 'topics.html', {'board': board})
+    return render(request, 'topics.html', {'board': board, 'topics': topics})
 
 @login_required
 def new_topic(request, board_id):
@@ -49,7 +51,8 @@ def new_topic(request, board_id):
 
 def topic_posts(request, board_id, topic_id):
     topic = get_object_or_404(Topic, board__pk=board_id, pk=topic_id)
-
+    topic.views+=1
+    topic.save()
     return render(request, 'topic_posts.html', {'topic': topic})
 
 @login_required
