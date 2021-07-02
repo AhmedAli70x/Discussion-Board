@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login as auth_login
 from .forms import SignUpForm
+from django.urls import reverse_lazy
+from django.views.generic import UpdateView
+from django.contrib.auth.models import User
 
 def signup(request):
     form = SignUpForm()
@@ -14,3 +17,11 @@ def signup(request):
     return render(request, 'signup.html', {'form': form} )
 
 
+class UserUpdateView(UpdateView):
+    model = User
+    fields = ('first_name', 'last_name', 'email',)
+    template_name = 'my_account.html'
+    success_url = reverse_lazy('my_account')
+
+    def get_object(self):
+        return self.request.user

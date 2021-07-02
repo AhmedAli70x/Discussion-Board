@@ -16,8 +16,12 @@
 {% block content %}
 <form method="post" class="mb-4">
     {%csrf_token%}
+     <div class="mb-4">
     {%include 'includes/form.html'%}
+   </div>
+
     <button type="submit" class="btn btn-success">Post the reply</button>
+
 </form>
 
 {%for post in topic.posts.all%}

@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -120,7 +121,12 @@ USE_L10N = True
 
 USE_TZ = True
 
-
+SUIT_CONFIG = {
+    'ADMIN_NAME': 'Django Suit',
+    'HEADER_DATE_FORMAT': 'l, j. F Y', # Saturday, 16th March 2013
+    'HEADER_TIME_FORMAT': 'H:i',       # 18:42
+    'layout': 'horizontal',
+}
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
